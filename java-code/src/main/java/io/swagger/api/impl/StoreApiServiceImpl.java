@@ -19,7 +19,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2025-11-26T14:14:21.170511440Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2025-11-26T14:15:35.808873091Z[GMT]")
 public class StoreApiServiceImpl extends StoreApiService {
     @Override
     public Response deleteOrder(Long orderId, SecurityContext securityContext) throws NotFoundException {

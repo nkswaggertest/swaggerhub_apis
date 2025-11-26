@@ -20,7 +20,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2025-11-26T14:14:21.170511440Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2025-11-26T14:15:35.808873091Z[GMT]")
 public abstract class PetApiService {
     public abstract Response addPet(Pet body,SecurityContext securityContext) throws NotFoundException;
     public abstract Response addPet(Long id,String name,Category category,List<String> photoUrls,List<Tag> tags,String status,SecurityContext securityContext) throws NotFoundException;
