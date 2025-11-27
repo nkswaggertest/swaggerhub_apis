@@ -1,0 +1,424 @@
+openapi: 3.1.0
+info:
+  title: Task Management API
+  description: A comprehensive API to manage tasks, users, projects, and comments.
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+    url: https://example.com/support
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+tags:
+  - name: Tasks
+    description: Operations related to task management
+  - name: Users
+    description: Operations related to user management
+  - name: Projects
+    description: Operations related to project management
+  - name: Comments
+    description: Operations related to comments
+
+paths:
+  /tasks:
+    get:
+      summary: List all tasks
+      description: Retrieve a list of all tasks
+      tags:
+        - Tasks
+      responses:
+        200:
+          description: A list of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Create a new task
+      description: Add a new task to the list
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+      responses:
+        201:
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /tasks/{taskId}:
+    get:
+      summary: Get a task
+      description: Retrieve a task by its ID
+      tags:
+        - Tasks
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task
+          schema:
+            type: string
+      responses:
+        200:
+          description: A single task
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          description: Task not found
+    put:
+      summary: Update a task
+      description: Update the details of a task
+      tags:
+        - Tasks
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTask'
+      responses:
+        200:
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          description: Task not found
+    delete:
+      summary: Delete a task
+      description: Remove a task by its ID
+      tags:
+        - Tasks
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task to delete
+          schema:
+            type: string
+      responses:
+        204:
+          description: Task deleted successfully
+        404:
+          description: Task not found
+
+  /users:
+    get:
+      summary: List all users
+      description: Retrieve a list of all registered users
+      tags:
+        - Users
+      responses:
+        200:
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      description: Add a new user to the system
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        201:
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /users/{userId}:
+    get:
+      summary: Get a user
+      description: Retrieve a user by their ID
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user
+          schema:
+            type: string
+      responses:
+        200:
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+    put:
+      summary: Update a user
+      description: Update the details of a user
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        200:
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+    delete:
+      summary: Delete a user
+      description: Remove a user by their ID
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The ID of the user to delete
+          schema:
+            type: string
+      responses:
+        204:
+          description: User deleted successfully
+        404:
+          description: User not found
+
+  /projects:
+    get:
+      summary: List all projects
+      description: Retrieve a list of all projects
+      tags:
+        - Projects
+      responses:
+        200:
+          description: A list of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      summary: Create a new project
+      description: Add a new project to the system
+      tags:
+        - Projects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProject'
+      responses:
+        201:
+          description: Project created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+
+  /projects/{projectId}:
+    get:
+      summary: Get a project
+      description: Retrieve a project by its ID
+      tags:
+        - Projects
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The ID of the project
+          schema:
+            type: string
+      responses:
+        200:
+          description: A single project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        404:
+          description: Project not found
+    put:
+      summary: Update a project
+      description: Update the details of a project
+      tags:
+        - Projects
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The ID of the project to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProject'
+      responses:
+        200:
+          description: Project updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        404:
+          description: Project not found
+    delete:
+      summary: Delete a project
+      description: Remove a project by its ID
+      tags:
+        - Projects
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The ID of the project to delete
+          schema:
+            type: string
+      responses:
+        204:
+          description: Project deleted successfully
+        404:
+          description: Project not found
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the task
+          example: "12345"
+        title:
+          type: string
+          description: The title of the task
+          example: "Finish the report"
+        description:
+          type: string
+          description: A detailed description of the task
+          example: "Complete the quarterly financial report"
+        isCompleted:
+          type: boolean
+          description: Whether the task is completed
+          example: false
+        projectId:
+          type: string
+          description: The ID of the project this task belongs to
+          example: "proj-123"
+    NewTask:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the task
+          example: "Finish the report"
+        description:
+          type: string
+          description: A detailed description of the task
+          example: "Complete the quarterly financial report"
+        isCompleted:
+          type: boolean
+          description: Whether the task is completed
+          example: false
+        projectId:
+          type: string
+          description: The ID of the project this task belongs to
+          example: "proj-123"
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+          example: "user-123"
+        username:
+          type: string
+          description: The username of the user
+          example: "john_doe"
+        email:
+          type: string
+          description: The email address of the user
+          example: "john@example.com"
+    NewUser:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+          example: "jane_doe"
+        email:
+          type: string
+          description: The email address of the user
+          example: "jane@example.com"
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the project
+          example: "proj-123"
+        name:
+          type: string
+          description: The name of the project
+          example: "Website Redesign"
+        description:
+          type: string
+          description: A description of the project
+          example: "Revamp the company website with a new design and features"
+    NewProject:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the project
+          example: "Mobile App Development"
+        description:
+          type: string
+          description: A description of the project
+          example: "Develop a new mobile app for the company"
